@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\inicioController;
 use App\Http\Controllers\productoController;
+use App\Http\Controllers\rolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,27 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     
         route::get('activa/{id}', 'activaproducto')->name('activapro');
     });    
+
+    Route::controller(rolController::class)->group(function(){
+
+        route::get('principalRol', 'principal')->name('rol.principal');
+
+        Route::get('principalRol/{variable}/mostrar', 'mostrar')->name('rol.mostrar');
+    
+        route::get('principalRol/crear', 'crear')->name('rol.crear');
+
+        route::post('principalRol','store')->name('rol.store');
+    
+        route::get('principalRol/{producto}/edit', 'editar')->name('rol.editar');
+
+        route::put('principalRol/{producto}', 'update')->name('rol.update');
+
+        route::delete('principalRol/{id}', 'borrar')->name('rol.borrar');
+    
+        route::get('desactiva/{id}', 'desactivaproducto')->name('desactivapro');
+    
+        route::get('activa/{id}', 'activaproducto')->name('activapro');
+        
+    }); 
 
 });
