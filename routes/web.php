@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\inicioController;
 use App\Http\Controllers\productoController;
 use App\Http\Controllers\rolController;
+use App\Http\Controllers\catController;
+//use App\Http\Controllers\usuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +66,27 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         route::get('activa/{id}', 'activaproducto')->name('activapro');
         
     }); 
+
+    Route::controller(catController::class)->group(function(){
+
+        route::get('principalcat', 'principal')->name('cat.principal');
+
+        Route::get('principalcat/{variable}/mostrar', 'mostrar')->name('cat.mostrar');
+    
+        route::get('principalcat/crear', 'crear')->name('cat.crear');
+
+        route::post('principalcat','store')->name('cat.store');
+    
+        route::get('principalcat/{producto}/edit', 'editar')->name('cat.editar');
+
+        route::put('principalcat/{producto}', 'update')->name('cat.update');
+
+        route::delete('principalcat/{id}', 'borrar')->name('cat.borrar');
+    
+        route::get('desactiva/{id}', 'desactivaproducto')->name('desactivapro');
+    
+        route::get('activa/{id}', 'activaproducto')->name('activapro');
+        
+    });  
 
 });
